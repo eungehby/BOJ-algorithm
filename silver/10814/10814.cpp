@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
 using namespace std;
 struct Member
 {
@@ -17,37 +18,23 @@ int main(void)
 
     // 멤버 생성 후 넣기
     vector<Member> member;
-    Member m;
+    member.reserve(num);
 
     for (int i = 0; i < num; i++)
     {
+        Member m;
         cin >> m.age >> m.name;
         member.push_back(m);
     }
 
-    // 정리
-    sort_mem(member, num);
+    // 정렬
+    stable_sort(member.begin(), member.end(), 
+    [](const Member &a, const Member &b)
+                { return a.age < b.age; });
 
     // 출력
-    cout << endl;
     for (int i = 0; i < num; i++)
         cout << member[i].age << " " << member[i].name << endl;
 
     return 0;
-}
-
-void sort_mem(vector<Member> &m, int num)
-{
-    for (int i = 1; i < num; i++)
-    {
-        Member temp = m[i];
-        int j = i - 1;
-
-        while (j >= 0 && temp.age < m[j].age)
-        {
-            m[j + 1] = m[j];
-            j--;
-        }
-        m[j + 1] = temp;
-    }
 }

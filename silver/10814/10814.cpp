@@ -8,7 +8,7 @@ struct Member
     string name;
 };
 
-void sort_mem(vector<Member> m, int);
+void sort_mem(vector<Member> &m, int num);
 
 int main(void)
 {
@@ -36,18 +36,18 @@ int main(void)
     return 0;
 }
 
-void sort_mem(vector<Member> m, int num)
+void sort_mem(vector<Member> &m, int num)
 {
-    for (int i = 0; i < num - 1; i++)
+    for (int i = 1; i < num; i++)
     {
-        for (int j = i + 1; j <= num; j++)
+        Member temp = m[i];
+        int j = i - 1;
+
+        while (j >= 0 && m[i].age < m[j].age)
         {
-            if (m[i].age > m[j].age)
-            {
-                Member temp = m[j];
-                m[j] = m[i];
-                m[i] = temp;
-            }
+            m[j + 1] = m[j];
+            j--;
         }
+        m[j + 1] = temp;
     }
 }

@@ -43,7 +43,7 @@ void sort_mem(vector<Member> &m, int num)
         Member temp = m[i];
         int j = i - 1;
 
-        while (j >= 0 && m[i].age < m[j].age)
+        while (j >= 0 && temp.age < m[j].age)
         {
             m[j + 1] = m[j];
             j--;
